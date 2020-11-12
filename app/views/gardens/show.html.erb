@@ -7,10 +7,26 @@
 <%= link_to 'Edit', edit_garden_path(@garden) %> |
 <%= link_to 'Back', gardens_path %>
 
+<div class="cards">
+  <% @garden.plants.each do |plant| %>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= plant.image_url %>')">
+      <%= plant.name %>
+      <%= link_to "+", plant_path(plant), method: :delete, data: { confirm: "Are you sure?" }, class: "card-remove-link" %>
+      <%= link_to "Add Tag", new_plant_plant_tag_path(plant), class: "card-add-tag-link" %>
+      <div class="card-tags">
+        <% plant.tags.each do |tag| %>
+          <span><%= tag.name %></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-4">
+
+<div class="container d-flex flex-column align-items-center">
+  <button class="btn btn-secondary toggle-form w-50 my-4">Toggle Form</button>
+  <div id="new-plant" class="row justify-content-center d-none">
+    <div class="">
       <h4>Add a plant:</h4>
       <%= simple_form_for [ @garden, @plant ] do |f| %>
         <%= f.input :name, placeholder: "Palm tree" %>
@@ -19,13 +35,4 @@
       <% end %>
     </div>
   </div>
-</div>
-
-<div class="cards">
-  <% @garden.plants.each do |plant| %>
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= plant.image_url %>')">
-      <%= plant.name %>
-      <%= link_to "+", plant_path(plant), method: :delete, data: { confirm: "Are you sure?" }, class: "card-remove-link" %>
-    </div>
-  <% end %>
 </div>

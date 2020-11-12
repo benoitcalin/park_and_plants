@@ -35,3 +35,23 @@
     opacity: 1;
   }
 }
+
+.card-add-tag-link {
+  background-color: white;
+  border-radius: 5%;
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  opacity: 0.8;
+  font-weight: lighter;
+  font-size: 16px;
+  &:hover {
+    color: black;
+    text-decoration: none;
+    opacity: 1;
+  }
+}
